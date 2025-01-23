@@ -23,7 +23,7 @@
                 <div class="txt">
                     <div class="discribtion">
                         <h4>SBG Alu</h4>
-                        <p>>Cabine de douche - Rampes d'escalier</p>
+                        <p> Cabine de douche - Rampes d'escalier </p>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,6 @@
 
         <div class="main-creatur">
             <div class="creature">
-                <h6>SBG Alu</h6>
                 <p>Zarzis</p>
             </div>
             <div class="custommer"></div>
@@ -50,9 +49,10 @@
                     <th>Type de colis</th>
                     <th>Couleur</th>
                     <th>Type de Blar</th>
-                    <th>Prix Total Sans Remiz (TND)</th>
-                    <th>Remiz</th>
-                    <th>Prix Total Avec Remiz (TND)</th>
+                    <th>Prix unitaire</th>
+                    <th>Remise</th>
+                    <th>Montant</th>
+                    <th>TVA</th>
                 </tr>
             </thead>
             <tbody id="table-body"></tbody>
@@ -128,6 +128,7 @@ commandes.forEach((cmd, index) => {
         <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
         <td>${cmd.Remiz} %</td>
         <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
+        <td> TVA 19 </td>
     `;
 }
 else{
@@ -143,6 +144,7 @@ else{
         <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
         <td>${cmd.Remiz} %</td>
         <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
+        <td> TVA 19 </td>
     `;
 
 }
