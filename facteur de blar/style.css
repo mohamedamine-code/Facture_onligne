@@ -1,0 +1,146 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: white;
+  background-color:  #215363;
+  
+  }
+  
+  .container {
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 50px;
+    padding: 20px;
+    background-color: #fff;
+    color: #555;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  span{
+    color: red;
+  }
+  h1 {
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  
+  input, select {
+    width: 97%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #ff7b00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #934807;
+  }
+  
+  #result {
+    height: 30px;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+
+  }
+  
+  #commandes-table{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .header{
+    display: flex;
+    gap: 27px;
+  }
+  .box-btn{
+    display: flex;
+    gap: 27px;
+  }
+  #back{
+    position: relative;;
+    top: 0px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    background-color: #ff7b00;
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+
+  /*nav*/
+  .header {
+    padding: 20px;
+    text-align: center;
+    height: 100%;
+
+  }
+  
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin: 0 15px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 300;
+  }
+  .highlight{
+    color: #e60000;
+  }
+  @media  screen and (max-width: 490px) {
+    body{
+      margin: 1px auto;
+      width: 150%;
+    }
+    }
+
+    @media screen and (max-width: 324px) {
+      body{
+        width: 200%;
+      }
+    }
+
+
+@media screen and (max-width: 270px) {
+  body{
+    width: 200%;
+  }
+  
+}

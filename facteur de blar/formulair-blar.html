@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de contact</title>
+    <link rel="stylesheet" href="Style-formulaire.css">
+</head>
+
+<body>
+    <div class="box-img">
+        <img src="/WhatsApp_Image_2024-12-01_at_20.17.02_7787f2fb-removebg-preview.png" alt="Image du formulaire">
+    </div>
+    <div class="container">
+        <button type="button" onclick="back()">Retour</button>
+        <h1>Contactez-nous</h1>
+
+        <form method="get" id="commandeForm">
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required>
+        
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+        
+            <div class="box-identifiant">
+                <label for="identifiant">Identifiant :</label>
+                <input type="text" id="identifiant" name="identifiant" required>
+                <button type="button" onclick="generateRandomID()">Générer un identifiant</button>
+            </div>
+        
+            <label for="telephone">Numéro de téléphone :</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="Ex: 12345678" required>
+        
+            <label for="date">Date d'affectation :</label>
+            <input type="date" id="date" name="date_affectation" required>
+        
+            <button type="button" onclick=" validerFormulaire();AddCommande();allerVersFacture() ">Confirmer la facture</button>
+        </form>
+    </div>
+
+    <script>
+        function back() {
+            window.location.href = "/facteur de blar/index.html";
+        }
+
+        function generateRandomID() {
+            const characters = '0123456789';
+            let id = 'C_2025_';
+            for (let i = 0; i < 5; i++) {
+                id += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            document.getElementById('identifiant').value = id;
+        }
+
+        function allerVersFacture() {
+            try {
+                window.location.href = "/facteur de blar/facture-blar.html";
+            } catch (error) {
+                console.error("Navigation failed:", error);
+                alert("Impossible de naviguer vers la page de facture. Veuillez réessayer.");
+            }
+        }
+
+        function validerFormulaire() {
+            const form = document.getElementById('commandeForm');
+            const inputs = form.querySelectorAll('input[required]');
+
+            let allValid = true;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    alert(`Le champ "${input.previousElementSibling.textContent}" est requis.`);
+                    allValid = false;
+                }
+            });
+
+            if (allValid) {
+                allerVersFacture();
+            }
+        }
+
+        function AddCommande() {
+            const prenom = document.getElementById("prenom").value;
+            const nom = document.getElementById("nom").value;
+            const identifiant = document.getElementById("identifiant").value;
+            const date= document.getElementById("date").value;
+            let commande_formlaire = { prenom, nom, identifiant,date };
+            let commandes_formulaires = JSON.parse(localStorage.getItem("commandes_formulaires")) || [];
+            commandes_formulaires.push(commande_formlaire);
+            localStorage.setItem("commandes_formulaires", JSON.stringify(commandes_formulaires));
+        }
+    </script>
+</body>
+</html>

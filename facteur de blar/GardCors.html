@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gardcoprs Price Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+    <nav class="navbar">
+    <div class="logo">CrystalCraft</div>
+    <ul class="nav-links">
+        <li><a href="#create">Créer Cristal</a></li>
+        <li><a href="#features">Fonctionnalités</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    </nav>
+</header>
+<div class="container">
+    <a href="/index-Main.html" id="back">RETOUR</a>
+    <h1>Calculateur De Prix ( <span>GARDE CORPS </span>)</h1>
+
+    <label for="color">Type d'objet :</label>
+    <select id="designation">
+    <option value="Garde coprs">Garde coprs</option>
+    <option value="Garde coprs">Escalier</option>
+    </select>
+    <label for="width">Prix de Metre :</label>
+    <input type="number" id="Prix_de_Metre" step="0.01" placeholder="Entrez la Prix de Metre">
+
+    <label for="width">Metrage (m) :</label>
+    <input type="number" id="width" step="0.01" placeholder="Entrez la Metrage ">
+
+
+    <label for="type">Type (Métal ou Rond ou Cristal) :</label>
+    <select id="type">
+    <option value="carré">Métal</option>
+    <option value="rond">Rond</option>
+    <option value="rond">Cristal</option>
+    
+    </select>
+
+    <label for="color">Couleur :</label>
+    <select id="color">
+    <option value="noir">Noir</option>
+    <option value="blanc">Blanc</option>
+    <option value="Inox">Inox</option>
+    <option value="faux bois">Faux bois</option>
+    <option value="faux bois">Doré</option>
+    </select>
+
+    <label for="typeGardcoprs">Type de Gardcoprs  :</label>
+        <input type="number" id="typeGardcoprs" placeholder="Entrez Un nombre entre 6 et 20 :">
+
+        <label for="width">Remise :</label>
+        <input type="number" value="0" id="Remiz" step="0.01" placeholder="Entrez un Remiz ">
+    
+
+    <label for="width">nbre:</label>
+    <input type="number" id="number" placeholder="Entrez le nombre de fois ">
+
+
+    <div class="box-btn">
+    <button id="btn-calculePrix" onclick="calculerPrix()">Calculer le prix</button>
+    <!-- <button onclick="AddCommande()">Add to Facture</button> -->
+    </div>
+    
+    <p id="result"></p>
+    <button id="sendEmail" style="display:none;" onclick="gotoFormulaire()">Confirmer la commande</button>
+    
+</div>
+
+<script>
+  let prixTotal = 0; // Global variable to store total price
+
+// Function to calculate price
+function calculerPrix() {
+  const typeObject = document.getElementById("designation").value.toLowerCase();
+  const Metrage = parseFloat(document.getElementById("width").value);
+  const type = document.getElementById("type").value.toLowerCase();
+  const couleur = document.getElementById("color").value.toLowerCase();
+  const typeGardcoprs = parseInt(document.getElementById("typeGardcoprs")?.value || 0);
+  const number = parseInt(document.getElementById("number").value);
+  let Prix_de_Metre=document.getElementById("Prix_de_Metre").value;
+  let Remiz = parseInt(document.getElementById("Remiz").value);
+
+  if (isNaN(Remiz) || Remiz === "" || Remiz === null) {
+    Remiz = 0;
+  }  
+
+  if ( isNaN(Prix_de_Metre) || isNaN(Metrage) ||   Metrage <= 0 || isNaN(number) || number <= 0 || Prix_de_Metre <= 0) {
+    document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
+    return;
+  }
+
+  let prixSurf = Metrage * Prix_de_Metre;
+  prixTotal = number * prixSurf ;
+  document.getElementById("result").textContent = `Le prix total est : ${prixTotal.toFixed(3)} TND.`;
+  if (Remiz !== 0) {
+    let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
+    document.getElementById("result").textContent = `Le prix total est : ${prixRemiz.toFixed(3)} TND.`;
+  } else {
+    document.getElementById("result").textContent = `Le prix total est : ${prixTotal.toFixed(3)} TND.`;
+  }
+
+}
+
+
+    // Function to add the order to localStorage and redirect to invoice page
+    function AddCommande() {
+  const Metrage = parseFloat(document.getElementById("width").value);
+  const type = document.getElementById("type").value.toLowerCase();
+  const couleur = document.getElementById("color").value.toLowerCase();
+  const typeObject = document.getElementById("designation").value.toLowerCase();
+  const number = parseInt(document.getElementById("number").value);
+  const typeGardcoprs = parseInt(document.getElementById("typeGardcoprs")?.value || 0);
+  const Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
+  let Remiz = parseInt(document.getElementById("Remiz").value);
+
+  // Validate input
+  if (isNaN(Metrage) || Metrage <= 0 || isNaN(number) || number <= 0 || isNaN(Prix_de_Metre) || Prix_de_Metre <= 0) {
+    document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
+    return;
+  }
+
+  // Initialize Remiz if invalid
+  if (isNaN(Remiz)) {
+    Remiz = 0;
+  }
+
+  // Calculate total price and apply discount
+  const prixSurf = Metrage * Prix_de_Metre;
+  const prixTotal = number * prixSurf;
+  const prixRemiz = prixTotal - (prixTotal * Remiz / 100);
+
+  // Create the new order object
+  const commande = {
+    number,
+    typeObject,
+    Metrage,
+    type,
+    couleur,
+    typeGardcoprs,
+    Remiz,
+    prixTotal : prixTotal.toFixed(3),
+    prixRemiz: prixRemiz.toFixed(3)
+  };
+
+  // Retrieve existing orders from localStorage
+  const commandes = JSON.parse(localStorage.getItem("commandes")) || [];
+
+  // Check if the current order already exists
+  const exists = commandes.some(c => 
+    c.number === commande.number &&
+    c.typeObject === commande.typeObject &&
+    c.Metrage === commande.Metrage &&
+    c.type === commande.type &&
+    c.couleur === commande.couleur &&
+    c.typeGardcoprs === commande.typeGardcoprs &&
+    c.Remiz === commande.Remiz &&
+    c.prixRemiz === commande.prixRemiz
+  );
+
+  if (!exists) {
+    commandes.push(commande);
+    localStorage.setItem("commandes", JSON.stringify(commandes));
+    document.getElementById("result").textContent = "Commande ajoutée avec succès.";
+    document.getElementById("sendEmail").style.display = "block"; // Show email button
+  } else {
+    document.getElementById("result").textContent = "Cette commande existe déjà.";
+  }
+}
+
+    // Function to redirect to invoice page
+
+    // Function to redirect to formulaire page
+    function gotoFormulaire() {
+      window.location.href ="/facteur de blar/formulair-GardeCorps.html"; // Redirect to formulaire page
+    }
+    const result= document.getElementById("result").value;
+    const boxbtn = document.querySelector(".box-btn");
+    const btncalculePrix= document.getElementById ("btn-calculePrix");
+    btncalculePrix.addEventListener("click",addbtn);
+
+    function addbtn() {
+  if (document.getElementById("result").textContent.trim() !== "") {
+    let existingBtn = document.querySelector(".button");
+    if (!existingBtn) {
+      let btn = document.createElement("button");
+      btn.textContent = "Ajouter au panier !";
+      btn.classList.add("button");
+      btn.onclick = AddCommande;
+      boxbtn.appendChild(btn);
+    }
+  }
+}
+</script>
+
+</body>
+</html>

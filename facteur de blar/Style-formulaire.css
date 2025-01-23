@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background:  #215363;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 50%;
+    margin: 50px auto;
+    background-color: #fff;
+    padding:20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input, textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #ff7b00;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #954c08;
+}
+
+.box-identifiant{
+    display: flex;
+    flex-direction: column;
+}
+.box-identifiant button{
+    margin-bottom: 20px;
+}
+
+.box-img{
+    position: absolute;
+    top: -12px;
+    left: -11px;
+    max-width: 150px;
+}
+.box-img img{
+    width: 100%;
+}
+
+
+@media  screen and (max-width: 490px) {
+    body{
+      margin: 1px auto;
+      width: 150%;
+    }
+    }
+
+    @media screen and (max-width: 324px) {
+      body{
+        width: 200%;
+      }
+    }
+
+
+@media screen and (max-width: 270px) {
+  body{
+    width: 200%;
+  }
+  
+}

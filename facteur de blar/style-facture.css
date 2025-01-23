@@ -1,0 +1,185 @@
+body {
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    background:   #215363;
+    color: black;
+    margin: 0;
+    height: 100%;
+
+}
+
+.container {
+
+    padding: 10px;
+    border-radius: 8px;
+
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 14px;
+}
+
+
+
+tr:hover {
+    background-color: #9f5109;
+}
+
+.header {
+    font-weight: bold;
+}
+
+.print-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ff7b00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#back{
+    position:relative;
+    width: 1;
+}
+.header-nav{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.main-creatur{
+    display: flex;
+    justify-content: space-between;
+}
+
+#label{
+    width: 150px !important;
+}
+.center{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+tr{
+    border-radius: 20px;
+
+}
+
+#summary-table{
+    width: 50%;
+
+}
+.box-tap{
+    display: flex;
+}
+.back{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #ff7b00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
+.box-img{
+    max-width: 150px;
+}
+.box-img img{
+    width: 100%;
+}
+
+.container {
+    margin: 10px 40px;
+}
+
+.box-imp{
+    display: flex;
+    position: relative;
+    bottom: 0;
+}
+.highlight{
+    color: #e60000;
+}
+
+@media print {
+    .print-button {
+    display: none;
+    }
+    .back{
+        display: none;
+    }
+}
+.sign{
+    position: absolute;
+    right: 70px;
+
+}
+.sign p{
+    position: relative;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+@media  screen and (max-width: 490px) {
+    body{
+      margin: 1px auto;
+      width: 150%;
+    }
+    }
+
+    @media screen and (max-width: 324px) {
+      body{
+        width: 200%;
+      }
+    }
+
+
+@media screen and (max-width: 270px) {
+  body{
+    width: 200%;
+  }
+  
+}
+
+.title{
+  display: flex;
+  align-items: center;
+  gap:35% ;
+}
+
+footer .F1{
+  display: flex;
+  justify-content: center;
+  margin-top: 12rem;
+
+}

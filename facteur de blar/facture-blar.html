@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture</title>
+    <link rel="stylesheet" href="style-facture.css">
+</head>
+<body>
+    <div class="btn-retour">
+        <a class="back" href="formulair-blar.html" onclick="reset()">Retour</a>
+    </div>
+    
+    <div class="container">
+        <div class="title">
+          <div class="box-img">
+            <img src="/WhatsApp_Image_2024-12-01_at_20.17.02_7787f2fb-removebg-preview.png" alt="">
+        </div>
+          <h1>Devis</h1></div>
+        <header>
+            <div class="header-nav">
+                
+                <div class="txt">
+                    <div class="discribtion">
+                        <h4>SBG Alu</h4>
+                        <p>>Cabine de douche - Rampes d'escalier</p>
+                    </div>
+                </div>
+            </div>
+            <div class="break"></div>
+        </header>
+
+        <div class="main-creatur">
+            <div class="creature">
+                <h6>SBG Alu</h6>
+                <p>Zarzis</p>
+            </div>
+            <div class="custommer"></div>
+        </div>
+
+        <table id="orders-table">
+            <thead>
+                <tr class="header">
+
+                    <th>Quantite</th>
+                    <th>Designation</th>
+                    <th>Largeur (m)</th>
+                    <th>Hauteur (m)</th>
+                    <th>Type</th>
+                    <th>Type de colis</th>
+                    <th>Couleur</th>
+                    <th>Type de Blar</th>
+                    <th>Prix Total Sans Remiz (TND)</th>
+                    <th>Remiz</th>
+                    <th>Prix Total Avec Remiz (TND)</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+
+        <!-- Total Price Table -->
+        <table id="summary-table">
+            <thead>
+                <tr class="header">
+                    <th>Sous Total : </th>
+                    <th id="prixTotal2">0.00 TND</th>
+                </tr>
+
+                <tr class="header">
+                    <th>Total TTC : </th>
+                    <th id="prixTotal">0.00 TND</th>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="box-imp">
+            <button class="print-button" onclick="window.print();">Imprimer la Facture</button>
+            <button id="back" href="/index-Main.html" class="print-button" onclick="reset()">Nouvelle Facture</button>
+        </div>
+        
+        <div class="sign">
+            <p>Signature & Cachet :</p>
+        </div>
+    </div>
+    
+    <footer>
+      <div class="F1">
+        <p>&copy; 2024 SBG Alu. Tous droits réservés</p>
+      </div>
+    
+    </footer>
+
+
+
+
+    <script>
+        // Load orders and customer data from localStorage
+let commandes = JSON.parse(localStorage.getItem("commandes")) || [];
+let commandes_formulaires = JSON.parse(localStorage.getItem("commandes_formulaires")) || [];
+let tableBody = document.getElementById("table-body");
+let custommer = document.querySelector(".custommer");
+
+// Populate customer information
+commandes_formulaires.forEach(cmd => {
+    let customerInfo = document.createElement("div");
+    customerInfo.innerHTML = `
+        <h5>Nom: ${cmd.nom}</h5>
+        <h5>Prénom: ${cmd.prenom}</h5>
+        <h5>Date: ${cmd.date}</h5>
+    `;
+    custommer.appendChild(customerInfo);
+});
+
+// Populate the orders table
+commandes.forEach((cmd, index) => {
+    let row = document.createElement("tr");
+    console.log(cmd)
+    if(cmd.type === "Ouvrent"){
+    row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${cmd.designation}</td>
+        <td>${cmd.largeur}</td>
+        <td>${cmd.hauteur}</td>
+        <td>${cmd.type}</td>
+        <td> -- </td>
+        <td>${cmd.couleur}</td>
+        <td>${cmd.typeBlar}</td>
+        <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
+        <td>${cmd.Remiz} %</td>
+        <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
+    `;
+}
+else{
+    row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${cmd.designation}</td>
+        <td>${cmd.largeur}</td>
+        <td>${cmd.hauteur}</td>
+        <td>${cmd.type}</td>
+        <td>${cmd.typeColis}</td>
+        <td>${cmd.couleur}</td>
+        <td>${cmd.typeBlar}</td>
+        <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
+        <td>${cmd.Remiz} %</td>
+        <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
+    `;
+
+}
+    tableBody.appendChild(row);
+});
+
+// Calculate and display the total price
+let total = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixRemiz) || 0), 0);
+document.getElementById("prixTotal").innerText = total.toFixed(2);
+
+let total2 = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixTotal) || 0), 0);
+document.getElementById("prixTotal2").innerText = total2.toFixed(2);
+
+// Reset functionality
+function reset() {
+    // Clear data in localStorage
+    localStorage.removeItem("commandes");
+    localStorage.removeItem("commandes_formulaires");
+    // Clear table and customer information
+    tableBody.innerHTML = '';
+    custommer.innerHTML = '';
+    window.location.href ="/index-Main.html";
+}
+
+
+    </script>
+</body>
+</html>
