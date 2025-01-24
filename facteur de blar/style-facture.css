@@ -113,7 +113,7 @@ tr{
     text-decoration: none;
 }
 .box-img{
-    max-width: 150px;
+    max-width: 210px;
 }
 .box-img img{
     width: 100%;
@@ -181,6 +181,6 @@ tr{
 footer .F1{
   display: flex;
   justify-content: center;
-  margin-top: 12rem;
+  margin-top: 10rem;
 
 }
