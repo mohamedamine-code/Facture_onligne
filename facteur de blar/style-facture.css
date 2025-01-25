@@ -19,7 +19,7 @@ body {
 h1 {
     text-align: center;
     color: black;
-    font-size: 24px;
+    font-size: 40px;
     margin-bottom: 20px;
 }
 
@@ -172,15 +172,30 @@ tr{
   
 }
 
-.title{
-  display: flex;
-  align-items: center;
-  gap:35% ;
+h4{
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
+.describition{
+  width: 320px;
+  letter-spacing: 2px;
 }
 
 footer .F1{
   display: flex;
   justify-content: center;
   margin-top: 10rem;
+  margin:0;
 
+}
+.ligne{
+  display: flex;
+  width: 100%;
+  background-color: #9f5109;
+  height: 2px;
+}
+
+.sign{
+  border-left: 3px solid  #9f5109;
 }

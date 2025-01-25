@@ -12,20 +12,29 @@
     </div>
     
     <div class="container">
-        <div class="title">
-          <div class="box-img">
-            <img src="123/WhatsApp_Image_2025-01-24_at_14.40.28_40738b50-removebg-preview (1).png" alt="">
-        </div>
-          <h1> Devis </h1>
-        </div>
-        
+
+      <div class="box-img">
+        <img src="/facteur de blar/123/WhatsApp_Image_2025-01-24_at_14.40.28_40738b50-removebg-preview (1).png" alt="">
+    </div>
+        <center>
+          <div class="title">
+            <h1> Devis </h1>
+          </div>
+        </center>
         <header>
             <div class="header-nav">
                 
                 <div class="txt">
                     <div class="discribtion">
                         <h4>SBG Alu</h4>
-                        <p> Cabine de douche - Rampes d'escalier </p>
+                        <span class="ligne">
+                        </span>
+                        <p class="describition"> Cabine de douche 
+                          - Rampe Escalier -
+                          Cuisine -
+                          Dressing -
+                          Décoration -
+                          Menuiserie aluminium </p>
                     </div>
                 </div>
             </div>
@@ -34,7 +43,6 @@
 
         <div class="main-creatur">
             <div class="creature">
-                <p>Zarzis</p>
             </div>
             <div class="custommer"></div>
         </div>
@@ -43,7 +51,7 @@
         <table id="orders-table">
             <thead>
                 <tr class="header">
-                    <th>Quantite</th>
+                    <th>QTE</th>
                     <th>Designation</th>
                     <th>Metrage (m)</th>
                     <th>Type</th>
@@ -85,6 +93,8 @@
     </div>
 
     <footer>
+      <span class="ligne">
+      </span>
       <div class="F1">
         <p>&copy; 2024 SBG Alu. Tous droits réservés,<span>tel: 22 22 22 22</span></p>
       </div>
@@ -120,7 +130,7 @@ commandes.forEach((cmd, index) => {
         <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND</td>
         <td>${cmd.Remiz} %</td>
         <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND </td>
-        <td> TVA 19 </td>
+        <td> 19 </td>
     `;
     tableBody.appendChild(row);
 });
