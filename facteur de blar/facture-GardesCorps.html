@@ -75,7 +75,7 @@
 
                 <tr class="header">
                     <th id="label">Total TTC :</th>
-                    <th id="prixTotal">0.00</th>
+                    <th id="prixTotal">0.00 </th>
                 </tr>
             </thead>
         </table>
@@ -146,8 +146,8 @@ commandes.forEach((cmd, index) => {
 // Calculate and display the total price
 let totalAvecRemiz = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixRemiz) || 0), 0);
 let totalSansRemiz = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixTotal) || 0), 0);
-document.getElementById("prixTotal").innerText = totalAvecRemiz.toFixed(2);
-document.getElementById("prixTotalSAnsRemiz").innerText = totalSansRemiz.toFixed(2);
+document.getElementById("prixTotal").innerText = totalAvecRemiz.toFixed(3);
+document.getElementById("prixTotalSAnsRemiz").innerText = totalSansRemiz.toFixed(3);
 
 // Reset functionality
 function reset() {

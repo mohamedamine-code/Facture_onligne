@@ -162,10 +162,10 @@ else{
 
 // Calculate and display the total price
 let total = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixRemiz) || 0), 0);
-document.getElementById("prixTotal").innerText = total.toFixed(2);
+document.getElementById("prixTotal").innerText = total.toFixed(3);
 
 let total2 = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixTotal) || 0), 0);
-document.getElementById("prixTotal2").innerText = total2.toFixed(2);
+document.getElementById("prixTotal2").innerText = total2.toFixed(3);
 
 // Reset functionality
 function reset() {
