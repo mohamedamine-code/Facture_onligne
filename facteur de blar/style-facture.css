@@ -205,15 +205,20 @@ footer .F1{
 }
 
 .sign {
-  border-left: 3px solid  #9f5109;
   position: relative;
   display: flex;
   right: 70px;
   flex-direction: row-reverse;
 }
 
-
-
+.sign p{
+  display: flex;
+  align-items: center;
+  border-left: 3px solid  #9f5109;
+  height: 30px;
+  padding-left: 5px;
+  padding-bottom: 140px;
+}
 
 img{
   position: absolute;
@@ -221,4 +226,13 @@ img{
   right:0;
   max-width: 150px;
   max-height: 150px;
+}
+
+.txt-footer{
+  margin-top: 10px;
+  border-top: 1px solid  #9f5109;
+}
+.custommer{
+  border-left: 2px solid  #9f5109;
+  padding-left: 10px;
 }
