@@ -4,13 +4,13 @@ body {
     background:   #215363;
     color: black;
     margin: 0;
-    height: 100%;
+    height: 1123px;
     background-image: url(/123/3a6a6d69883cae4e17d25f4a611ae0eb.jpg);
 
 }
 
 .container {
-
+    height: 120vh;
     padding: 10px;
     border-radius: 8px;
 
@@ -20,7 +20,8 @@ h1 {
     text-align: center;
     color: black;
     font-size: 40px;
-    margin-bottom: 20px;
+    margin: 0px;
+    padding: 0px;
 }
 
 table {
@@ -70,8 +71,8 @@ tr:hover {
 .header-nav{
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 .main-creatur{
     display: flex;
@@ -120,7 +121,8 @@ tr{
 }
 
 .container {
-    margin: 10px 40px;
+  height: 100%;
+  margin: 10px 40px;
 }
 
 .box-imp{
@@ -175,18 +177,24 @@ tr{
 h4{
   font-size: 25px;
   letter-spacing: 2px;
+  margin: 0;
+  margin-top: 5px;
 }
 
 .describition{
   width: 320px;
   letter-spacing: 2px;
+  border-top: 3px solid  #9f5109;
+  padding-top: 10px;
+  margin: 0;
+  margin-top: 5px;
 }
+
+
 
 footer .F1{
   display: flex;
   justify-content: center;
-  margin-top: 10rem;
-  margin:0;
 
 }
 .ligne{
@@ -196,6 +204,21 @@ footer .F1{
   height: 2px;
 }
 
-.sign{
+.sign {
   border-left: 3px solid  #9f5109;
+  position: relative;
+  display: flex;
+  right: 70px;
+  flex-direction: row-reverse;
+}
+
+
+
+
+img{
+  position: absolute;
+  top: 0;
+  right:0;
+  max-width: 150px;
+  max-height: 150px;
 }
