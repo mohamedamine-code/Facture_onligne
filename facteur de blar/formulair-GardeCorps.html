@@ -1,94 +1,167 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire de contact</title>
-    <link rel="stylesheet" href="Style-formulaire.css">
+    <title>Facture</title>
+    <link rel="stylesheet" href="style-facture.css">
 </head>
-
 <body>
-    <div class="box-img">
-        <img src="/WhatsApp_Image_2024-12-01_at_20.17.02_7787f2fb-removebg-preview.png" alt="Image du formulaire">
+    <div class="btn-retour">
+        <a class="back" href="/facteur de blar/formulair-GardeCorps.html" onclick="reset()">Retour</a>
     </div>
+    
     <div class="container">
-        <button type="button" onclick="back()">Retour</button>
-        <h1>Contactez-nous</h1>
 
-        <form method="get" id="commandeForm">
-            <label for="prenom">Prénom :</label>
-            <input type="text" id="prenom" name="prenom" required>
-        
-            <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom" required>
-        
-            <div class="box-identifiant">
-                <label for="identifiant">Identifiant :</label>
-                <input type="text" id="identifiant" name="identifiant" required>
-                <button type="button" onclick="generateRandomID()">Générer un identifiant</button>
-            </div>
-        
-            <label for="telephone">Numéro de téléphone :</label>
-            <input type="tel" id="telephone" name="telephone" placeholder="Ex: 12345678" required>
-        
-            <label for="date">Date d'affectation :</label>
-            <input type="date" id="date" name="date_affectation" required>
-        
-            <button type="button" onclick=" validerFormulaire();AddCommande();allerVersFacture() ">Confirmer la facture</button>
-        </form>
+
+      <div class="box-img">
+        <img src="/facteur de blar/123/WhatsApp_Image_2025-01-24_at_14.40.28_40738b50-removebg-preview (1).png" alt="">
     </div>
+        <center>
+          <div class="title">
+            <h1> Devis </h1>
+          </div>
+        </center>
+        <header>
+            <div class="header-nav">
+                
+                <div class="txt">
+                    <div class="discribtion">
+                        <h4>B&G ALU</h4>
+                        <p class="describition"> Cabine de douche 
+                          - Rampe Escalier -
+                          Cuisine -
+                          Dressing -
+                          Décoration -
+                          Menuiserie aluminium </p>
+                    </div>
+                </div>
+            </div>
+            <div class="break"></div>
+        </header>
+
+        <div class="main-creatur">
+            <div class="creature">
+            </div>
+            <div class="custommer"></div>
+        </div>
+
+        <!-- Orders Table -->
+        <table id="orders-table">
+            <thead>
+                <tr class="header">
+                    <th>QTE</th>
+                    <th>Designation</th>
+                    <th>Metrage (m)</th>
+                    <th>Type</th>
+                    <th>Couleur</th>
+                    <th>Prix unitaire</th>
+                    <th>Remise</th>
+                    <th>Montant</th>
+                    <th>TVA</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+
+        <!-- Total Price Table -->
+        <div class="center">
+        <table id="summary-table">
+            <thead>
+                <tr class="header">
+                    <th id="label">Sous Total :</th>
+                    <th id="prixTotalSAnsRemiz">0.50</th>
+                </tr>
+
+                <tr class="header">
+                    <th id="label">Total TTC :</th>
+                    <th id="prixTotal">0.00 </th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+        <div class="box-imp">
+            <button class="print-button" onclick="window.print();">Imprimer la Facture</button>
+            <button id="back" class="print-button" onclick="reset()">Nouvelle Facture</button>
+        </div>
+    
+        <div class="sign">
+          <p>Signature & Cachet :</p>
+      </div>
+  
+
+      <footer>
+        <div class="F1">
+          <center class="txt-footer">
+            <p>
+              &copy; 2024 SBG ALU. Tous droits réservés, 
+              <span>Tel (1) : 92 629 734, Tel (2) : 92 629 739</span>, 
+              Fixe : 75 708 249 
+            </p>
+            <p>Adresse : Hassi Jerbi Zarzis, 4174 Medenine</p>
+          </center>
+        </div>
+        </div>
+      </footer>
+    
+    
+      </div>
+
+    
 
     <script>
-        function back() {
-            window.location.href = "/facteur de blar/GardCors.html";
-        }
+    // Load orders and customer data from localStorage
+let commandes = JSON.parse(localStorage.getItem("commandes")) || [];
+let commandes_formulaires = JSON.parse(localStorage.getItem("commandes_formulaires")) || [];
+let tableBody = document.getElementById("table-body");
+let custommer = document.querySelector(".custommer");
 
-        function generateRandomID() {
-            const characters = '0123456789';
-            let id = 'C_2025_';
-            for (let i = 0; i < 5; i++) {
-                id += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            document.getElementById('identifiant').value = id;
-        }
+// Populate customer information
+commandes_formulaires.forEach(cmd => {
+    let customerInfo = document.createElement("div");
+    customerInfo.innerHTML = `
+        <h5>Nom: ${cmd.nom}</h5>
+        <h5>Prénom: ${cmd.prenom}</h5>
+        <h5>Date: ${cmd.date}</h5>
+    `;
+    custommer.appendChild(customerInfo);
+});
 
-        function allerVersFacture() {
-            try {
-                window.location.href = "/facteur de blar/facture-GardesCorps.html";
-            } catch (error) {
-                console.error("Navigation failed:", error);
-                alert("Impossible de naviguer vers la page de facture. Veuillez réessayer.");
-            }
-        }
+// Populate the orders table
+commandes.forEach((cmd, index) => {
+    let row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${cmd.number}</td>
+        <td>${cmd.typeObject}</td>
+        <td>${cmd.Metrage}</td>
+        <td>${cmd.type}</td>
+        <td>${cmd.couleur}</td>
+        <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND</td>
+        <td>${cmd.Remiz} %</td>
+        <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND </td>
+        <td> 19 % </td>
+    `;
+    tableBody.appendChild(row);
+});
 
-        function validerFormulaire() {
-            const form = document.getElementById('commandeForm');
-            const inputs = form.querySelectorAll('input[required]');
+// Calculate and display the total price
+let totalAvecRemiz = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixRemiz) || 0), 0);
+let totalSansRemiz = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixTotal) || 0), 0);
+document.getElementById("prixTotal").innerText = totalAvecRemiz.toFixed(3);
+document.getElementById("prixTotalSAnsRemiz").innerText = totalSansRemiz.toFixed(3);
 
-            let allValid = true;
+// Reset functionality
+function reset() {
+    // Clear data in localStorage
+    localStorage.removeItem("commandes");
+    localStorage.removeItem("commandes_formulaires");
+    // Clear table and customer information
+    tableBody.innerHTML = '';
+    custommer.innerHTML = '';
+    window.location.href ="/index.html";
+}
 
-            inputs.forEach(input => {
-                if (!input.value.trim()) {
-                    alert(`Le champ "${input.previousElementSibling.textContent}" est requis.`);
-                    allValid = false;
-                }
-            });
-
-            if (allValid) {
-                allerVersFacture();
-            }
-        }
-
-        function AddCommande() {
-            const prenom = document.getElementById("prenom").value;
-            const nom = document.getElementById("nom").value;
-            const identifiant = document.getElementById("identifiant").value;
-            const date= document.getElementById("date").value;
-            let commande_formlaire = { prenom, nom, identifiant,date };
-            let commandes_formulaires = JSON.parse(localStorage.getItem("commandes_formulaires")) || [];
-            commandes_formulaires.push(commande_formlaire);
-            localStorage.setItem("commandes_formulaires", JSON.stringify(commandes_formulaires));
-        }
     </script>
 </body>
 </html>

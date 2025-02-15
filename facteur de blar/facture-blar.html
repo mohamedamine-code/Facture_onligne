@@ -43,25 +43,25 @@
         </div>
 
         <table id="orders-table">
-            <thead>
-                <tr class="header">
-
-                    <th>QTE</th>
-                    <th>Designation</th>
-                    <th>Largeur (m)</th>
-                    <th>Hauteur (m)</th>
-                    <th>Type</th>
-                    <th>Type de colis</th>
-                    <th>Couleur</th>
-                    <th>Type de cristal</th>
-                    <th>Prix unitaire</th>
-                    <th>Remise</th>
-                    <th>Montant</th>
-                    <th>TVA</th>
-                </tr>
-            </thead>
-            <tbody id="table-body"></tbody>
-        </table>
+          <thead>
+              <tr class="header">
+                  <th>QTE</th>
+                  <th>Designation</th>
+                  <th>Largeur (m)</th>
+                  <th>Hauteur (m)</th>
+                  <th>Type</th>
+                  <th>Type de colis</th>
+                  <th>Couleur</th>
+                  <th>Type de cristal</th>
+                  <th>Rideau</th> <!-- Nouvelle colonne pour les rideaux -->
+                  <th>Prix unitaire</th>
+                  <th>Remise</th>
+                  <th>Montant</th>
+                  <th>TVA</th>
+              </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+      </table>
 
         <!-- Total Price Table -->
         <table id="summary-table">
@@ -70,10 +70,13 @@
                     <th>Sous Total : </th>
                     <th id="prixTotal2">0.00 TND</th>
                 </tr>
-
                 <tr class="header">
-                    <th>Total TTC : </th>
-                    <th id="prixTotal">0.00 TND</th>
+                  <th>Total TTC : </th>
+                  <th id="prixTotal">0.00 TND</th>
+              </tr>
+                <tr class="header">
+                    <th>TVA: </th>
+                    <th id="prixTotal">19 %</th>
                 </tr>
             </thead>
         </table>
@@ -121,42 +124,43 @@ commandes_formulaires.forEach(cmd => {
 });
 
 // Populate the orders table
+// Populate the orders table
 commandes.forEach((cmd, index) => {
     let row = document.createElement("tr");
-    console.log(cmd)
-    if(cmd.type === "Ouvrent"){
-    row.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${cmd.designation}</td>
-        <td>${cmd.largeur}</td>
-        <td>${cmd.hauteur}</td>
-        <td>${cmd.type}</td>
-        <td> -- </td>
-        <td>${cmd.couleur}</td>
-        <td>${cmd.typeBlar}</td>
-        <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
-        <td>${cmd.Remiz} %</td>
-        <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
-        <td> 19 % </td>
-    `;
-}
-else{
-    row.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${cmd.designation}</td>
-        <td>${cmd.largeur}</td>
-        <td>${cmd.hauteur}</td>
-        <td>${cmd.type}</td>
-        <td>${cmd.typeColis}</td>
-        <td>${cmd.couleur}</td>
-        <td>${cmd.typeBlar}</td>
-        <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
-        <td>${cmd.Remiz} %</td>
-        <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
-        <td> TVA 19 </td>
-    `;
-
-}
+    console.log(cmd);
+    if (cmd.type === "Ouvrent") {
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${cmd.designation}</td>
+            <td>${cmd.largeur}</td>
+            <td>${cmd.hauteur}</td>
+            <td>${cmd.type}</td>
+            <td> -- </td>
+            <td>${cmd.couleur}</td>
+            <td>${cmd.typeBlar}</td>
+            <td>${cmd.rideau || "--"}</td> <!-- Afficher la valeur du rideau -->
+            <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
+            <td>${cmd.Remiz} %</td>
+            <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
+            <td> 19 % </td>
+        `;
+    } else {
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${cmd.designation}</td>
+            <td>${cmd.largeur}</td>
+            <td>${cmd.hauteur}</td>
+            <td>${cmd.type}</td>
+            <td>${cmd.typeColis}</td>
+            <td>${cmd.couleur}</td>
+            <td>${cmd.typeBlar}</td>
+            <td>${cmd.rideau || "--"}</td> <!-- Afficher la valeur du rideau -->
+            <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
+            <td>${cmd.Remiz} %</td>
+            <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
+            <td> TVA 19 </td>
+        `;
+    }
     tableBody.appendChild(row);
 });
 

@@ -21,10 +21,18 @@
     <a href="/index.html" id="back">RETOUR</a>
     <h1>Calculateur De Prix ( <span>ALUMINIUM </span>)</h1>
 
+
     <label for="color">Type d'objet :</label>
     <select id="designation">
       <option value="FENETRE">FENETRE</option>
       <option value="PORTE">PORTE</option>
+    </select>
+
+    <label for="color">Rideau :</label>
+    <select id="rideau"> <!-- Ajoutez un id ici -->
+      <option value="rideaux extridie">Rideaux Extridie</option>
+      <option value="rideaux monobloc">Rideaux Monobloc</option>
+      <option value="rideaux monobloc">Rideaux Monobloc</option>
     </select>
 
     <label for="width">Prix de Metre :</label>
@@ -36,7 +44,7 @@
 
     <label for="height">Hauteur (m) :</label>
     <input type="number" id="height" step="0.01" placeholder="Entrez la hauteur">
-<div class="cond">
+  <div class="cond">
     <label for="type">Type (Colis ou Ouvrent) :</label>
     <select id="type">
       <option id="Ouvrent" value="Ouvrent">Ouvrent</option>
@@ -142,7 +150,6 @@ function rest() {
 
 // Function to add the order to localStorage and redirect to invoice page
 function AddCommande() {
-
   let couleur = document.getElementById("color").value.trim().toLowerCase();
   let typeBlar = document.getElementById("typeBlar").value;
   let designation = document.getElementById("designation").value.trim().toLowerCase();
@@ -152,7 +159,8 @@ function AddCommande() {
   let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
   let Remiz = parseInt(document.getElementById("Remiz").value);
   let number = parseInt(document.getElementById("number").value);
-  let type=document.querySelector("#type").value;
+  let type = document.querySelector("#type").value;
+  let rideau = document.getElementById("rideau").value; // Récupérer la valeur du rideau
 
   if (isNaN(Remiz)) {
     Remiz = 0;
@@ -171,16 +179,13 @@ function AddCommande() {
   let surface = largeur * hauteur;
   let prixSurf = surface * Prix_de_Metre;
   let prixTotal = number * prixSurf;
-  if(type === "Ouvrent"){
-    prixTotal+=1000;
-  }
-  else{
-    prixTotal+=2000;
+  if (type === "Ouvrent") {
+    prixTotal += 1000;
+  } else {
+    prixTotal += 2000;
   }
 
   let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
-  console.log(prixTotal);
-  console.log(prixRemiz);
 
   // Create the order object
   let commande = {
@@ -192,6 +197,7 @@ function AddCommande() {
     typeColis,
     couleur,
     typeBlar,
+    rideau, // Ajouter la valeur du rideau ici
     prixTotal,
     Remiz,
     prixRemiz: prixRemiz.toFixed(3)
@@ -209,6 +215,7 @@ function AddCommande() {
     c.type === commande.type &&
     c.couleur === commande.couleur &&
     c.typeBlar === commande.typeBlar &&
+    c.rideau === commande.rideau && // Vérifier aussi le rideau
     c.prixRemiz === commande.prixRemiz
   );
 
