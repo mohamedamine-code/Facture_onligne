@@ -1,167 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facture</title>
-    <link rel="stylesheet" href="style-facture.css">
+    <title>Formulaire de contact</title>
+    <link rel="stylesheet" href="Style-formulaire.css">
 </head>
+
 <body>
-    <div class="btn-retour">
-        <a class="back" href="/facteur de blar/formulair-GardeCorps.html" onclick="reset()">Retour</a>
+    <div class="box-img">
+        <img src="/WhatsApp_Image_2024-12-01_at_20.17.02_7787f2fb-removebg-preview.png" alt="Image du formulaire">
     </div>
-    
     <div class="container">
+        <button type="button" onclick="back()">Retour</button>
+        <h1>Contactez-nous</h1>
 
-
-      <div class="box-img">
-        <img src="/facteur de blar/123/WhatsApp_Image_2025-01-24_at_14.40.28_40738b50-removebg-preview (1).png" alt="">
-    </div>
-        <center>
-          <div class="title">
-            <h1> Devis </h1>
-          </div>
-        </center>
-        <header>
-            <div class="header-nav">
-                
-                <div class="txt">
-                    <div class="discribtion">
-                        <h4>B&G ALU</h4>
-                        <p class="describition"> Cabine de douche 
-                          - Rampe Escalier -
-                          Cuisine -
-                          Dressing -
-                          Décoration -
-                          Menuiserie aluminium </p>
-                    </div>
-                </div>
+        <form method="get" id="commandeForm">
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required>
+        
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+        
+            <div class="box-identifiant">
+                <label for="identifiant">Identifiant :</label>
+                <input type="text" id="identifiant" name="identifiant" required>
+                <button type="button" onclick="generateRandomID()">Générer un identifiant</button>
             </div>
-            <div class="break"></div>
-        </header>
-
-        <div class="main-creatur">
-            <div class="creature">
-            </div>
-            <div class="custommer"></div>
-        </div>
-
-        <!-- Orders Table -->
-        <table id="orders-table">
-            <thead>
-                <tr class="header">
-                    <th>QTE</th>
-                    <th>Designation</th>
-                    <th>Metrage (m)</th>
-                    <th>Type</th>
-                    <th>Couleur</th>
-                    <th>Prix unitaire</th>
-                    <th>Remise</th>
-                    <th>Montant</th>
-                    <th>TVA</th>
-                </tr>
-            </thead>
-            <tbody id="table-body"></tbody>
-        </table>
-
-        <!-- Total Price Table -->
-        <div class="center">
-        <table id="summary-table">
-            <thead>
-                <tr class="header">
-                    <th id="label">Sous Total :</th>
-                    <th id="prixTotalSAnsRemiz">0.50</th>
-                </tr>
-
-                <tr class="header">
-                    <th id="label">Total TTC :</th>
-                    <th id="prixTotal">0.00 </th>
-                </tr>
-            </thead>
-        </table>
-
+        
+            <label for="telephone">Numéro de téléphone :</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="Ex: 12345678" required>
+        
+            <label for="date">Date d'affectation :</label>
+            <input type="date" id="date" name="date_affectation" required>
+        
+            <button type="button" onclick="handleConfirmation(event)">Confirmer la facture</button>
+        </form>
     </div>
-        <div class="box-imp">
-            <button class="print-button" onclick="window.print();">Imprimer la Facture</button>
-            <button id="back" class="print-button" onclick="reset()">Nouvelle Facture</button>
-        </div>
-    
-        <div class="sign">
-          <p>Signature & Cachet :</p>
-      </div>
-  
-
-      <footer>
-        <div class="F1">
-          <center class="txt-footer">
-            <p>
-              &copy; 2024 SBG ALU. Tous droits réservés, 
-              <span>Tel (1) : 92 629 734, Tel (2) : 92 629 739</span>, 
-              Fixe : 75 708 249 
-            </p>
-            <p>Adresse : Hassi Jerbi Zarzis, 4174 Medenine</p>
-          </center>
-        </div>
-        </div>
-      </footer>
-    
-    
-      </div>
-
-    
 
     <script>
-    // Load orders and customer data from localStorage
-let commandes = JSON.parse(localStorage.getItem("commandes")) || [];
-let commandes_formulaires = JSON.parse(localStorage.getItem("commandes_formulaires")) || [];
-let tableBody = document.getElementById("table-body");
-let custommer = document.querySelector(".custommer");
+        // Fonction pour revenir à la page précédente
+        function back() {
+            window.location.href = "/facteur de blar/GardCors.html";
+        }
 
-// Populate customer information
-commandes_formulaires.forEach(cmd => {
-    let customerInfo = document.createElement("div");
-    customerInfo.innerHTML = `
-        <h5>Nom: ${cmd.nom}</h5>
-        <h5>Prénom: ${cmd.prenom}</h5>
-        <h5>Date: ${cmd.date}</h5>
-    `;
-    custommer.appendChild(customerInfo);
-});
+        // Générer un identifiant aléatoire
+        function generateRandomID() {
+            const characters = '0123456789';
+            let id = 'C_2025_';
+            for (let i = 0; i < 5; i++) {
+                id += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            document.getElementById('identifiant').value = id;
+        }
 
-// Populate the orders table
-commandes.forEach((cmd, index) => {
-    let row = document.createElement("tr");
-    row.innerHTML = `
-        <td>${cmd.number}</td>
-        <td>${cmd.typeObject}</td>
-        <td>${cmd.Metrage}</td>
-        <td>${cmd.type}</td>
-        <td>${cmd.couleur}</td>
-        <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND</td>
-        <td>${cmd.Remiz} %</td>
-        <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND </td>
-        <td> 19 % </td>
-    `;
-    tableBody.appendChild(row);
-});
+        // Rediriger vers la page de facture
+        function allerVersFacture() {
+            try {
+                window.location.href = "/facteur de blar/facture-GardesCorps.html";
+            } catch (error) {
+                console.error("Navigation failed:", error);
+                alert("Impossible de naviguer vers la page de facture. Veuillez réessayer.");
+            }
+        }
 
-// Calculate and display the total price
-let totalAvecRemiz = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixRemiz) || 0), 0);
-let totalSansRemiz = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixTotal) || 0), 0);
-document.getElementById("prixTotal").innerText = totalAvecRemiz.toFixed(3);
-document.getElementById("prixTotalSAnsRemiz").innerText = totalSansRemiz.toFixed(3);
+        // Valider le formulaire
+        function validerFormulaire() {
+            const form = document.getElementById('commandeForm');
+            const inputs = form.querySelectorAll('input[required]');
 
-// Reset functionality
-function reset() {
-    // Clear data in localStorage
-    localStorage.removeItem("commandes");
-    localStorage.removeItem("commandes_formulaires");
-    // Clear table and customer information
-    tableBody.innerHTML = '';
-    custommer.innerHTML = '';
-    window.location.href ="/index.html";
-}
+            for (let input of inputs) {
+                if (!input.value.trim()) {
+                    alert(`Le champ "${input.previousElementSibling.textContent}" est requis.`);
+                    return false; // Formulaire invalide
+                }
+            }
+            return true; // Formulaire valide
+        }
 
+        // Ajouter la commande au localStorage
+        function AddCommande() {
+            const prenom = document.getElementById("prenom").value;
+            const nom = document.getElementById("nom").value;
+            const identifiant = document.getElementById("identifiant").value;
+            const telephone = document.getElementById("telephone").value;
+            const date = document.getElementById("date").value;
+
+            // Vérifier si l'identifiant existe déjà
+            let commandes_formulaires = JSON.parse(localStorage.getItem("commandes_formulaires")) || [];
+            const exists = commandes_formulaires.some(cmd => cmd.identifiant === identifiant);
+
+            if (exists) {
+                alert("Un identifiant identique existe déjà. Veuillez en générer un nouveau.");
+                return false; // Arrêter l'exécution
+            }
+
+            // Ajouter la nouvelle commande
+            try {
+                let commande_formulaire = { prenom, nom, identifiant, telephone, date };
+                commandes_formulaires.push(commande_formulaire);
+                localStorage.setItem("commandes_formulaires", JSON.stringify(commandes_formulaires));
+                return true; // Continuer l'exécution
+            } catch (error) {
+                console.error("Erreur de stockage:", error);
+                alert("Erreur lors de l'enregistrement !");
+                return false;
+            }
+        }
+
+        // Gérer la confirmation du formulaire
+        function handleConfirmation(event) {
+            event.preventDefault(); // Empêcher le comportement par défaut du bouton
+
+            if (!validerFormulaire()) return; // Valider le formulaire
+            if (!AddCommande()) return; // Ajouter la commande
+            allerVersFacture(); // Rediriger vers la page de facture
+        }
     </script>
 </body>
 </html>
