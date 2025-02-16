@@ -34,15 +34,17 @@
             <label for="date">Date d'affectation :</label>
             <input type="date" id="date" name="date_affectation" required>
         
-            <button type="button" onclick=" validerFormulaire();AddCommande();allerVersFacture() ">Confirmer la facture</button>
+            <button type="button" onclick="handleConfirmation(event)">Confirmer la facture</button>
         </form>
     </div>
 
     <script>
+        // Fonction pour revenir à la page précédente
         function back() {
-            window.location.href = "/facteur de blar/index.html";
+            window.location.href = "/facteur de blar/GardCors.html";
         }
 
+        // Générer un identifiant aléatoire
         function generateRandomID() {
             const characters = '0123456789';
             let id = 'C_2025_';
@@ -52,42 +54,67 @@
             document.getElementById('identifiant').value = id;
         }
 
+        // Rediriger vers la page de facture
         function allerVersFacture() {
             try {
-                window.location.href = "/facteur de blar/facture-blar.html";
+                window.location.href = "/facteur de blar/facture-GardesCorps.html";
             } catch (error) {
                 console.error("Navigation failed:", error);
                 alert("Impossible de naviguer vers la page de facture. Veuillez réessayer.");
             }
         }
 
+        // Valider le formulaire
         function validerFormulaire() {
             const form = document.getElementById('commandeForm');
             const inputs = form.querySelectorAll('input[required]');
 
-            let allValid = true;
-
-            inputs.forEach(input => {
+            for (let input of inputs) {
                 if (!input.value.trim()) {
                     alert(`Le champ "${input.previousElementSibling.textContent}" est requis.`);
-                    allValid = false;
+                    return false; // Formulaire invalide
                 }
-            });
-
-            if (allValid) {
-                allerVersFacture();
             }
+            return true; // Formulaire valide
         }
 
+        // Ajouter la commande au localStorage
         function AddCommande() {
             const prenom = document.getElementById("prenom").value;
             const nom = document.getElementById("nom").value;
             const identifiant = document.getElementById("identifiant").value;
-            const date= document.getElementById("date").value;
-            let commande_formlaire = { prenom, nom, identifiant,date };
+            const telephone = document.getElementById("telephone").value;
+            const date = document.getElementById("date").value;
+
+            // Vérifier si l'identifiant existe déjà
             let commandes_formulaires = JSON.parse(localStorage.getItem("commandes_formulaires")) || [];
-            commandes_formulaires.push(commande_formlaire);
-            localStorage.setItem("commandes_formulaires", JSON.stringify(commandes_formulaires));
+            const exists = commandes_formulaires.some(cmd => cmd.identifiant === identifiant);
+
+            if (exists) {
+                alert("Un identifiant identique existe déjà. Veuillez en générer un nouveau.");
+                return false; // Arrêter l'exécution
+            }
+
+            // Ajouter la nouvelle commande
+            try {
+                let commande_formulaire = { prenom, nom, identifiant, telephone, date };
+                commandes_formulaires.push(commande_formulaire);
+                localStorage.setItem("commandes_formulaires", JSON.stringify(commandes_formulaires));
+                return true; // Continuer l'exécution
+            } catch (error) {
+                console.error("Erreur de stockage:", error);
+                alert("Erreur lors de l'enregistrement !");
+                return false;
+            }
+        }
+
+        // Gérer la confirmation du formulaire
+        function handleConfirmation(event) {
+            event.preventDefault(); // Empêcher le comportement par défaut du bouton
+
+            if (!validerFormulaire()) return; // Valider le formulaire
+            if (!AddCommande()) return; // Ajouter la commande
+            allerVersFacture(); // Rediriger vers la page de facture
         }
     </script>
 </body>
