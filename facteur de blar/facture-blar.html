@@ -76,7 +76,7 @@
               </tr>
                 <tr class="header">
                     <th>TVA: </th>
-                    <th id="prixTotal">19 %</th>
+                    <th id="prixTotal_TVA">19 %</th>
                 </tr>
             </thead>
         </table>
@@ -170,6 +170,10 @@ document.getElementById("prixTotal").innerText = total.toFixed(3);
 
 let total2 = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixTotal) || 0), 0);
 document.getElementById("prixTotal2").innerText = total2.toFixed(3);
+
+let total3 = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixTotal) || 0), 0);
+let TVA = total3 - (total3.toFixed(3))*0.19;
+document.getElementById("prixTotal_TVA").innerText = TVA.toFixed(3);
 
 // Reset functionality
 function reset() {
