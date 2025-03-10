@@ -53,7 +53,6 @@
                   <th>Type de colis</th>
                   <th>Couleur</th>
                   <th>Type de cristal</th>
-                  <th>Rideau</th> <!-- Nouvelle colonne pour les rideaux -->
                   <th>Prix unitaire</th>
                   <th>Remise</th>
                   <th>Montant</th>
@@ -138,7 +137,6 @@ commandes.forEach((cmd, index) => {
             <td> -- </td>
             <td>${cmd.couleur}</td>
             <td>${cmd.typeBlar}</td>
-            <td>${cmd.rideau || "--"}</td> <!-- Afficher la valeur du rideau -->
             <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
             <td>${cmd.Remiz} %</td>
             <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
@@ -154,7 +152,6 @@ commandes.forEach((cmd, index) => {
             <td>${cmd.typeColis}</td>
             <td>${cmd.couleur}</td>
             <td>${cmd.typeBlar}</td>
-            <td>${cmd.rideau || "--"}</td> <!-- Afficher la valeur du rideau -->
             <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
             <td>${cmd.Remiz} %</td>
             <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
