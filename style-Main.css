@@ -57,7 +57,7 @@ body {
 }
 
 .box-btn {
-  display: flex;
+  display: grid;
   gap: 30%;
   width: 100%;
 }

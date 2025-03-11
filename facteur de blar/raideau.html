@@ -3,10 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="Style-formulaire.css">
+  <title>Calculateur De Prix (ALU)</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="logo">CrystalCraft</div>
+      <ul class="nav-links">
+        <li><a href="#create">Créer Cristal</a></li>
+        <li><a href="#features">Fonctionnalités</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <a href="/index.html" id="back">RETOUR</a>
+    <h1>Calculateur De Prix ( <span> Raideau </span>)</h1>
 
+    <label for="designation">Type de Raideau :</label>
+    <select id="designation">
+      <option value="extrudé">Extrudé</option>
+      <option value="injecté">Injecté</option>
+      <option value="monobloc">Monobloc</option>
+      <option value="PVC">PVC</option>
+    </select>
+
+    <label for="Prix_de_Metre">Prix de Mètre :</label>
+    <input type="number" id="Prix_de_Metre" step="0.01" placeholder="Entrez le prix de mètre">
+
+    <label for="width">Largeur (m) :</label>
+    <input type="number" id="width" step="0.01" placeholder="Entrez la largeur">
+
+    <label for="height">Hauteur (m) :</label>
+    <input type="number" id="height" step="0.01" placeholder="Entrez la hauteur">
+
+    <label for="color">Couleur :</label>
+    <select id="color">
+      <option value="noir">Noir</option>
+      <option value="blanc">Blanc</option>
+      <option value="inox">Inox</option>
+      <option value="doré">Doré</option>
+      <option value="faux bois">Faux bois</option>
+    </select>
+
+    <label for="Remiz">Remise (%) :</label>
+    <input type="number" id="Remiz" value="0" step="0.01" placeholder="Entrez la remise">
+
+    <label for="number">Nombre :</label>
+    <input type="number" id="number" step="1" placeholder="Entrez le nombre">
+
+    <div class="box-btn">
+      <button id="btn-calculePrix" onclick="calculerPrix()">Calculer le prix</button>
+    </div>
+    
+    <p id="result"></p>
+    <button id="sendEmail" style="display:none;" onclick="gotoFormulaire()">Confirmer la commande</button>
+  </div>
+
+<script>
+function calculerPrix() {
+  let largeur = parseFloat(document.getElementById("width").value);
+  let hauteur = parseFloat(document.getElementById("height").value);
+  let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
+  let Remiz = parseFloat(document.getElementById("Remiz").value);
+  let number = parseInt(document.getElementById("number").value);
+
+  if (isNaN(Remiz)) Remiz = 0;
+
+  if (isNaN(largeur) || isNaN(hauteur) || isNaN(Prix_de_Metre) || isNaN(number) ||
+      largeur <= 0 || hauteur <= 0 || Prix_de_Metre <= 0 || number <= 0) {
+    document.getElementById("result").textContent = "Veuillez entrer des valeurs valides.";
+    return;
+  }
+
+  let surface = largeur * hauteur;
+  let prixTotal = number * surface * Prix_de_Metre;
+  let prixFinal = prixTotal - (prixTotal * Remiz / 100);
+
+  document.getElementById("result").textContent = `Le prix total est : ${prixFinal.toFixed(2)} TND.`;
+}
+
+function gotoFormulaire() {
+  window.location.href = "formulair-blar.html";
+}
+</script>
 </body>
 </html>
