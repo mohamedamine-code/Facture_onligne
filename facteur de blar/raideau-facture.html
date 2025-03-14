@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="btn-retour">
-        <a class="back" href="formulair-blar.html" onclick="reset()">Retour</a>
+        <a class="back" href="/facteur de blar/raideau-formulaire.html" onclick="reset()">Retour</a>
     </div>
 
     <div class="container">
@@ -41,12 +41,11 @@
         <table id="orders-table">
             <thead>
                 <tr class="header">
-                    <th>num</th>
+                    <th>Qte</th>
                     <th>Type de Raideau</th>
                     <th>Largeur (m)</th>
                     <th>Hauteur (m)</th>
                     <th>Couleur</th>
-                    
                     <th>Prix unitaire</th>
                     <th>Remise</th>
                     <th>Montant</th>
@@ -119,7 +118,7 @@
         commandes.forEach((cmd, index) => {
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${index + 1}</td>
+                <td>${cmd.number}</td>
                 <td>${cmd.designation}</td>
                 <td>${cmd.largeur}</td>
                 <td>${cmd.hauteur}</td>
