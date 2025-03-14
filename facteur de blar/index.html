@@ -151,8 +151,7 @@ function AddCommande() {
   let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
   let Remiz = parseInt(document.getElementById("Remiz").value);
   let number = parseInt(document.getElementById("number").value);
-  let type = document.querySelector("#type").value;
-  let rideau = document.getElementById("rideau").value; // Récupérer la valeur du rideau
+  let type = document.querySelector("#type").value; // Récupérer la valeur du rideau
 
   if (isNaN(Remiz)) {
     Remiz = 0;
@@ -189,7 +188,7 @@ function AddCommande() {
     typeColis,
     couleur,
     typeBlar,
-    rideau, // Ajouter la valeur du rideau ici
+// Ajouter la valeur du rideau ici
     prixTotal,
     Remiz,
     prixRemiz: prixRemiz.toFixed(3)
@@ -206,8 +205,7 @@ function AddCommande() {
     c.hauteur === commande.hauteur &&
     c.type === commande.type &&
     c.couleur === commande.couleur &&
-    c.typeBlar === commande.typeBlar &&
-    c.rideau === commande.rideau && // Vérifier aussi le rideau
+    c.typeBlar === commande.typeBlar &&// Vérifier aussi le rideau
     c.prixRemiz === commande.prixRemiz
   );
 
