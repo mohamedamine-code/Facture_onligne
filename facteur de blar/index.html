@@ -97,7 +97,8 @@ function calculerPrix() {
   let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
   let Remiz = parseInt(document.getElementById("Remiz").value);
   let number = parseInt(document.getElementById("number").value);
-  let type=document.querySelector("#type").value;
+  let type = document.querySelector("#type").value;
+
   // Initialize Remiz to 0 if invalid
   if (isNaN(Remiz)) {
     Remiz = 0;
@@ -116,11 +117,10 @@ function calculerPrix() {
   let surface = largeur * hauteur;
   let prixSurf = surface * Prix_de_Metre;
   let prixTotal = number * prixSurf;
-  if(type === "Ouvrent"){
-    prixTotal+=1000;
-  }
-  else{
-    prixTotal+=2000;
+  if (type === "Ouvrent") {
+    prixTotal += 1000;
+  } else {
+    prixTotal += 2000;
   }
 
   let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
@@ -128,7 +128,6 @@ function calculerPrix() {
   // Display result
   document.getElementById("result").textContent = `Le prix total est : ${prixRemiz.toFixed(3)} TND.`;
 }
-
 
 
 // Function to reset input fields
@@ -280,9 +279,6 @@ type_colis.addEventListener("change", function (e) {
     }
   }
 });
-
-
-console.log
 
   </script>
 

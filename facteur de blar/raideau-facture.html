@@ -1,11 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture</title>
+    <link rel="stylesheet" href="style-facture.css">
 </head>
 <body>
-  
+    <div class="btn-retour">
+        <a class="back" href="formulair-blar.html" onclick="reset()">Retour</a>
+    </div>
+
+    <div class="container">
+        <div class="title">
+            <div class="box-img">
+                <img src="/facteur de blar/123/WhatsApp_Image_2025-01-24_at_14.40.28_40738b50-removebg-preview (1).png" alt="">
+            </div>
+            <center><h1>Devis</h1></center>
+        </div>
+
+        <header>
+            <div class="header-nav">
+                <div class="txt">
+                    <div class="discribtion">
+                        <h4>B&G ALU</h4>
+                        <p class="describition">
+                            Cabine de douche - Rampe Escalier - Cuisine - Dressing - Décoration - Menuiserie aluminium
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="break"></div>
+        </header>
+
+        <div class="main-creatur">
+            <div class="creature"></div>
+            <div class="custommer"></div>
+        </div>
+
+        <table id="orders-table">
+            <thead>
+                <tr class="header">
+                    <th>num</th>
+                    <th>Type de Raideau</th>
+                    <th>Largeur (m)</th>
+                    <th>Hauteur (m)</th>
+                    <th>Couleur</th>
+                    
+                    <th>Prix unitaire</th>
+                    <th>Remise</th>
+                    <th>Montant</th>
+                    <th>TVA</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+
+        <!-- Total Price Table -->
+        <table id="summary-table">
+            <thead>
+                <tr class="header">
+                    <th>Sous Total : </th>
+                    <th id="prixTotal2">0.00 TND</th>
+                </tr>
+                <tr class="header">
+                    <th>Total TTC : </th>
+                    <th id="prixTotal">0.00 TND</th>
+                </tr>
+                <tr class="header">
+                    <th>TVA: </th>
+                    <th id="prixTotal_TVA">19 %</th>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="box-imp">
+            <button class="print-button" onclick="window.print();">Imprimer la Facture</button>
+            <button id="back" href="/index.html" class="print-button" onclick="reset()">Nouvelle Facture</button>
+        </div>
+
+        <div class="sign">
+            <p>Signature & Cachet :</p>
+        </div>
+
+        <footer>
+            <div class="F1">
+                <center class="txt-footer">
+                    <p>
+                        &copy; 2024 SBG ALU. Tous droits réservés,
+                        <span>Tel (1) : 92 629 734, Tel (2) : 92 629 739</span>,
+                        Fixe : 75 708 249
+                    </p>
+                    <p>Adresse : Hassi Jerbi Zarzis, 4174 Medenine</p>
+                </center>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Load orders and customer data from localStorage
+        const commandes = JSON.parse(localStorage.getItem("commandes")) || [];
+        const commandes_formulaires = JSON.parse(localStorage.getItem("commandes_formulaires")) || [];
+        const tableBody = document.querySelector("#table-body");
+        const custommer = document.querySelector(".custommer");
+
+        // Populate customer information
+        commandes_formulaires.forEach(cmd => {
+            const customerInfo = document.createElement("div");
+            customerInfo.innerHTML = `
+                <h5>Nom: ${cmd.nom}</h5>
+                <h5>Prénom: ${cmd.prenom}</h5>
+                <h5>Date: ${cmd.date}</h5>
+            `;
+            custommer.appendChild(customerInfo);
+        });
+
+        // Populate the orders table
+        commandes.forEach((cmd, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${cmd.designation}</td>
+                <td>${cmd.largeur}</td>
+                <td>${cmd.hauteur}</td>
+                <td>${cmd.couleur}</td>
+                <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND</td>
+                <td>${cmd.Remiz} %</td>
+                <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND</td>
+                <td>19 %</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        // Calculate and display the total price
+        const total = commandes.reduce((acc, cmd) => acc + parseFloat(cmd.prixRemiz || 0), 0);
+        const total2 = commandes.reduce((acc, cmd) => acc + parseFloat(cmd.prixTotal || 0), 0);
+        const TVA = total2 * 0.19; // Corrected TVA calculation
+
+        document.querySelector("#prixTotal").innerText = `${total.toFixed(3)} TND`;
+        document.querySelector("#prixTotal2").innerText = `${total2.toFixed(3)} TND`;
+        document.querySelector("#prixTotal_TVA").innerText = `${TVA.toFixed(3)} TND`;
+
+        // Reset functionality
+        function reset() {
+            localStorage.removeItem("commandes");
+            localStorage.removeItem("commandes_formulaires");
+            tableBody.innerHTML = '';
+            custommer.innerHTML = '';
+            window.location.href = "/index.html";
+        }
+    </script>
 </body>
 </html>

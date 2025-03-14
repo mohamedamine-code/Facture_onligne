@@ -58,8 +58,6 @@ body {
 
 .box-btn {
   display: grid;
-  gap: 30%;
-  width: 100%;
 }
 
 .cta-button {
@@ -71,7 +69,9 @@ body {
   transition: background 0.3s;
   font-size: 20px;
   width: 320px;
+  margin-bottom: 50px;
 }
+
 
 
 .cta-button:hover {

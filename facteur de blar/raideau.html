@@ -53,12 +53,15 @@
     <label for="number">Nombre :</label>
     <input type="number" id="number" step="1" placeholder="Entrez le nombre">
 
+
     <div class="box-btn">
       <button id="btn-calculePrix" onclick="calculerPrix()">Calculer le prix</button>
+    <!-- <button onclick="AddCommande()">Add to Facture</button> -->
     </div>
-    
     <p id="result"></p>
+
     <button id="sendEmail" style="display:none;" onclick="gotoFormulaire()">Confirmer la commande</button>
+    
   </div>
 
 <script>
@@ -82,10 +85,115 @@ function calculerPrix() {
   let prixFinal = prixTotal - (prixTotal * Remiz / 100);
 
   document.getElementById("result").textContent = `Le prix total est : ${prixFinal.toFixed(2)} TND.`;
+
 }
 
 function gotoFormulaire() {
-  window.location.href = "formulair-blar.html";
+  window.location.href = "/facteur de blar/raideau-formulaire.html";
+}
+function addbtn() {
+  if (document.getElementById("result").textContent.trim() !== "") {
+    let existingBtn = document.querySelector(".button");
+    if (!existingBtn) {
+      let btn = document.createElement("button");
+      btn.textContent = "Ajouter au panier !";
+      btn.classList.add("button");
+      
+      // Attach a single function that calls both `AddCommande` and `rest`
+      btn.onclick = function () {
+        AddCommande();
+        rest();
+      };
+      boxbtn.appendChild(btn);
+    }
+  }
+}
+
+function AddCommande() {
+  let couleur = document.getElementById("color").value.trim().toLowerCase();
+  let designation = document.getElementById("designation").value.trim().toLowerCase();
+  let largeur = parseFloat(document.getElementById("width").value);
+  let hauteur = parseFloat(document.getElementById("height").value);
+  let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
+  let Remiz = parseInt(document.getElementById("Remiz").value);
+  let number = parseInt(document.getElementById("number").value);
+
+  if (isNaN(Remiz)) {
+    Remiz = 0;
+  }
+
+  // Validate inputs
+  if (
+    isNaN(largeur) || isNaN(hauteur) || isNaN(Prix_de_Metre) || 
+    largeur <= 0 || hauteur <= 0 || Prix_de_Metre <= 0 || isNaN(number) || number <= 0
+  ) {
+    document.getElementById("result").textContent = "Veuillez entrer des valeurs valides.";
+    return;
+  }
+
+  // Calculate surface, price, and discount
+  let surface = largeur * hauteur;
+  let prixSurf = surface * Prix_de_Metre;
+  let prixTotal = number * prixSurf;
+  let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
+
+  // Create the order object
+  let commande = {
+    number,
+    designation,
+    largeur,
+    hauteur,
+    couleur,
+    prixTotal,
+    Remiz,
+    prixRemiz: prixRemiz.toFixed(3)
+  };
+
+  // Retrieve existing orders
+  let commandes = JSON.parse(localStorage.getItem("commandes")) || [];
+
+  // Check for duplicates
+  let exists = commandes.some(c => 
+    c.number === commande.number &&
+    c.designation === commande.designation &&
+    c.largeur === commande.largeur &&
+    c.hauteur === commande.hauteur &&
+    c.couleur === commande.couleur &&
+    c.prixRemiz === commande.prixRemiz
+  );
+
+  // Add or notify
+  if (!exists) {
+    commandes.push(commande);
+    localStorage.setItem("commandes", JSON.stringify(commandes));
+    document.getElementById("sendEmail").style.display = "block"; // Show email button
+    document.getElementById("result").textContent = "Commande ajoutée avec succès.";
+  } else {
+    document.getElementById("result").textContent = "Cette commande existe déjà.";
+  }
+}
+const result= document.getElementById("result").value;
+    const boxbtn = document.querySelector(".box-btn");
+    const btncalculePrix= document.getElementById ("btn-calculePrix");
+    btncalculePrix.addEventListener("click",addbtn);
+
+    function addbtn() {
+  if (document.getElementById("result").textContent.trim() !== "") {
+    let existingBtn = document.querySelector(".button");
+    if (!existingBtn) {
+      let btn = document.createElement("button");
+      btn.textContent = "Ajouter au panier !";
+      btn.classList.add("button");
+      
+      // Attach a single function that calls both `AddCommande` and `rest`
+      btn.onclick = function () {
+        AddCommande();
+        rest();
+      };
+      
+      boxbtn.appendChild(btn);
+    }
+  }
 }
 </script>
 </body>
