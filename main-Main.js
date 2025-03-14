@@ -29,5 +29,5 @@ function goCreateSection1() {
     window.location.href="/facteur de blar/GardCors.html";
 }
 function goCreateSection2() {
-  window.location.href="/facteur de blar/raideau-facture.html";
+  window.location.href="/facteur de blar/raideau.html";
 }
